@@ -36,4 +36,41 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * After the user creation, give him/her a profile
+     *
+     *
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        //This event (create() gets fired whenever a user is created.
+        static::created(
+            function ($user)
+            {
+                $user->profile()->create([
+                    'title' => 'your title'
+                ]);
+
+
+                //We will send an email to the new user
+                //Mail::to($user->email)->send(new NewUserWelcomeEmail());
+
+            }
+
+
+        );
+    }
+
+    /**
+     * Every user has a profile associated
+     *
+     *
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 }

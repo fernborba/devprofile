@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="laravel artisan server">
+  <component name="PublishConfigData" serverName="Laravel serve">
     <serverData>
-      <paths name="fb-admin">
+      <paths name="Laravel serve">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="laravel artisan server">
+      <paths name="freeCodeGram">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="localhost-xampp">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 
 class ProfileController extends Controller
 {
+
+    /**
+     * Show the user profile.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index(User $user)
+    {
+        //dd($user->profile());
+        return view('profile.index',compact('user'));
+    }
+
     /**
      * Show the form for editing the profile.
      *
