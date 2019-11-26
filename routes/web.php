@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
+Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.update');
+
 Route::group(['middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
@@ -34,7 +36,7 @@ Route::get('/profile/{user}', 'ProfileController@index')->name('profile.index');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController');
-    /*Route::get('profile/{user}', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);*/
+    Route::get('profile/{user}/edit', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);

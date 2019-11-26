@@ -11,7 +11,7 @@
                     <img class="card-img" src="{{ asset('white') }}/img/card-primary.png" alt="Card image">
                     <h4 class="card-title">{{ _('Register') }}</h4>
                 </div>
-                <form class="form" method="post" action="{{ route('register') }}">
+                <form class="form mt-4" method="post" action="{{ route('register') }}">
                     @csrf
 
                     <div class="card-body">

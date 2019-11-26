@@ -3,7 +3,20 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 offset-1">
+            <nav class="nav">
+                <a class="nav-link active" href="/profile/{{{ auth()->user()->id }}}/edit">Edit profile</a>
+
+
+
+            </nav>
+            @include('alerts.success')
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-1">
+
             <div class="card card-user">
+
                 <div class="card-body">
                     <p class="card-text">
                         <div class="author">
@@ -21,25 +34,29 @@
                     </p>
                 <div class="card-description">
                     {{ $user->profile->about ?? 'Every step you take toward a goal may seem insignificant, but you must have confidence in your destination. Be clear about your goal so you know that the steps you\'re taking will help you end up where you ultimately want to be.' }}
-
                 </div>
             </div>
             <div class="card-footer">
                 <div class="button-container">
-                    <button class="btn btn-icon btn-round btn-facebook">
-                        <i class="fab fa-facebook"></i>
-                    </button>
-                    <button class="btn btn-icon btn-round btn-twitter">
-                        <i class="fab fa-twitter"></i>
-                    </button>
-                    <button class="btn btn-icon btn-round btn-google">
-                        <i class="fab fa-google-plus"></i>
-                    </button>
+
+                    @if ($user->profile->linkfacebook)
+                        <button class="btn btn-icon btn-round btn-facebook">
+                            <i class="fab fa-facebook"></i>
+                        </button>
+                    @endif
+                    @if ($user->profile->linktwitter)
+                        <button class="btn btn-icon btn-round btn-twitter">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                    @endif
+                    @if ($user->profile->linklinkedin)
+                        <button class="btn btn-icon btn-round btn-linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 
-
-    </div>
 @endsection

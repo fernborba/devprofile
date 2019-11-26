@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use phpDocumentor\Reflection\Types\Array_;
 
 class ProfileController extends Controller
 {
@@ -37,11 +38,41 @@ class ProfileController extends Controller
      * @param  \App\Http\Requests\ProfileRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProfileRequest $request)
+    //public function update(ProfileRequest $request)
+    public function update(User $user)
     {
-        auth()->user()->update($request->all());
+        //$this->authorize('update', $user->profile);
+        //dd(request()->all());
+        $data = request()->validate([
+            'name' => 'required',
+            'email' =>  ['email', 'required'],
+            'title' => 'required',
+            'about' => '',
+            'place' => '',
+            'linkfacebook' => ['url', 'nullable'],
+            'linktwitter' => ['url', 'nullable'],
+            'linklinkedin' => ['url', 'nullable'],
+        ]);
+        //dd($data);
+        //Mount array with User data
+        $user_data = array();
+        $user_data = array_merge($user_data, array('name' => $data['name']));
+        $user_data = array_merge($user_data, array('email' => $data['email']));
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        //Remove 2 first elements (name and email)
+        array_shift($data);
+        array_shift($data);
+
+
+
+        //Update User
+        $result = auth()->user()->update($user_data);
+
+        //Update Profile
+        $result = auth()->user()->profile->update($data);
+
+
+        return redirect("/profile/{$user->id}")->withStatus(__('Profile successfully updated.'));
     }
 
     /**
